@@ -61,8 +61,8 @@ jobs:
         
       - name: Get Docker Image from Docker Hub
         run: |
-          docker pull docker.io/albaker/supermario:${{ env.VERSION }}
-          docker save -o supermariolatestdockerimage.tar docker.io/albaker/supermario:${{ env.VERSION }}
+          docker pull docker.io/aalbaker/supermario:${{ env.VERSION }}
+          docker save -o supermariolatestdockerimage.tar docker.io/aalbaker/supermario:${{ env.VERSION }}
      
       - name: Run Trivy vulnerability scanner in tarball mode
         uses: aquasecurity/trivy-action@master
@@ -87,7 +87,7 @@ jobs:
       - name: Update Deployment YAML
         run: |
           git pull
-          sed -i "s|image: albaker/supermario:.*$|image: albaker/supermario:${{ env.VERSION }}|" deployment.yaml
+          sed -i "s|image: aalbaker/supermario:.*$|image: aalbaker/supermario:${{ env.VERSION }}|" deployment.yaml
           echo ${{ env.VERSION }} > version.txt
           CURRENT_VERSION=$(cat version.txt)
           git add deployment.yaml version.txt
